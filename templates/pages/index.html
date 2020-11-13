@@ -1,0 +1,130 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% block title %} | Welcome {% endblock %}
+
+{% block content %}
+<!-- Showcase -->
+<section id="" >
+    <div class="text-center">
+      <!-- Jumbotron -->
+<div class="jumbotron text-center" style="margin-bottom:1%">
+
+  <!-- Title -->
+  <h2 class="card-title h2">Welcome to CodeWave Smart Classes</h2>
+  <!-- Subtitle -->
+
+  <!-- Grid row -->
+  <div class="row d-flex justify-content-center">
+
+    <!-- Grid column -->
+    <div class="col-xl-7 pb-2">
+      <p class="card-text">1. Register as a new student to get access to classes</p>
+      <p class="card-text">2. Review Your classes Under the User Dashboard </p>
+      <p class="card-text">3. Enroll your Class to get notified</p>
+
+    </div>
+    <!-- Grid column -->
+
+  </div>
+  <!-- Grid row -->
+
+  <hr class="my-4">
+
+  <div class="pt-2">
+      <p class="blue-text my-4 font-weight-bold">LOG IN</p>
+      <a href = "{% url 'login' %}">
+          <button  type="button" class="btn btn-outline-primary btn-blue waves-effect">Student </button>
+      </a>
+      <a href = "{% url 'teacherlogin' %}">
+        <button  type="button" class="btn btn-outline-primary btn-blue waves-effect">Teacher </button>
+      </a>
+  </div>
+
+</div>
+<!-- Jumbotron -->
+    </div>
+  </section>
+<br>
+
+<div class="text-center container">
+    <h2>
+      -- Available Classes --
+    </h2>
+  </div>
+<!-- Available Listings -->
+  <section id="listings" class="py-4">
+    <div class="container">
+      <div class="row">
+        {% if listings %}
+          {% for listing in listings %}
+          <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card listing-preview">
+                <img class="card-img-top" src="/" alt="">
+                <div class="card-img-overlay">
+
+                </div>
+                <div class="card-body" style="background-color: seashell;">
+                  <div class="listing-heading text-center" style="background-color:#fbdfcc">
+                    <h4 class="text-primary"><a href="{% url 'classlisting_detail' listing.id %}">{{ listing.classname }}</a></h4>
+                    <p>
+                      <i class="fas fa-map-marker text-secondary"></i> By : {{ listing.teacherid.name }}</p>
+                  </div>
+                  <hr>
+                  <div class="listing-heading text-center">
+                    <h6 class="text-primary"><span style="font-weight: bold;">Topics:</span> {{ listing.topics }}</h6>
+                    <br>
+                    <p>
+                      <i class="fas fa-th-large"></i> <span style="font-weight: bold;">Description:</span> {{ listing.description }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">
+            <p>No Listings Available</p>
+          </div>
+        {% endif %}
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="team" class="">
+    <div class="container">
+      <h2 class="text-center">Our Team</h2>
+      <div class="row text-center">
+        {% if teachers %}
+          {% for teacher in teachers %}
+          <div class="col-md-2" style="background: whitesmoke;">
+              <img src="{% static 'css/123.PNG' %}" alt="gone" class="rounded-circle mb-3">
+              <h4>{{ teacher.name }}</h4>
+              <p class="text-success">
+                <i class="fas fa-award text-success mb-3"></i> Teacher</p>
+              <hr>
+              <p>
+                <i class="fas fa-phone"></i> {{ teacher.phone }}</p>
+              <p>
+                <i class="fas fa-envelope-open"></i> {{ teacher.email }}</p>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">
+            <p>No Teachers Available</p>
+          </div>
+        {% endif %}       
+      </div>
+    </div>
+  </section>
+  <!-- Alerts -->
+
+
+  <!-- Listings -->
+  
+
+
+{% endblock %}

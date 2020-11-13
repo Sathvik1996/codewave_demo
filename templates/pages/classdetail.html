@@ -1,0 +1,64 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% block title %} | Detail Us {% endblock %}
+
+{% block content %}
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">{{listings.classname}}</h1>
+          <br>
+          <h4 class="">Topics : {{listings.topics}}</h4>
+          <hr>
+          <br>
+          <p class="mt-4">Description : {{listings.description}}</p>
+          <a href="{% url 'classlisting_save' listings.id %}">
+            <button class="btn-primary btn-block btn-lg">
+              Register
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Breadcrumb -->
+
+  <section id="about" class="py-4 text-center">
+    <div class="container">
+      <div class="">
+        <div class="">
+          <h3></h3>
+          <h4>Created By : {{listings.teacherid.name}}</h4>
+          <hr>
+          <h4>Mail : {{listings.teacherid.email}}</h4>
+          <hr>
+          <h4>Phone : {{listings.teacherid.phone}}</h4>
+          <hr>
+          <h4>Recruited at : {{listings.teacherid.hire_date}}</h4>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </section>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+  <!-- Work -->
+
+
+  <!-- Team -->
+
+{% endblock %}

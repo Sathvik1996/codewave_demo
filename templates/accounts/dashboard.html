@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+
+{% block title %} | User Dashboard {% endblock %}
+
+{% block content %}
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">{{user.first_name}} Dashboard - [Student]</h1>
+          <p class="lead">Register and Enroll your classes</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">
+              <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active"> Dashboard</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Alerts -->
+  {% include 'partials/_alerts.html' %}
+
+  <section id="dashboard" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Welcome {{ user.first_name }}</h2>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr>
+
+
+
+
+
+  <div class="text-center container">
+    <h2>
+      -- Enrolled Classes -- 
+    </h2>
+  </div>
+  <!-- Enrolled Listings -->
+  <section id="listings" class="py-4">
+    <div class="container">
+      <div class="row">
+        {% if enrollments %}
+          {% for enrolled in enrollments %}
+          <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card listing-preview">
+                <img class="card-img-top" src="/" alt="">
+                <div class="card-img-overlay">
+                 
+                </div>
+                <div class="card-body" style="background-color: #daffda;">
+                  <div class="listing-heading text-center" style="background-color:#aaefaa">
+                    <h4 class="text-primary">{{ enrolled.student_listing_id.classname }}</h4>
+                    <p>
+                      <i class="fas fa-map-marker text-secondary"></i> By : {{ enrolled.student_listing_id.teacherid.name }}</p>
+                  </div>
+                  <hr>
+                  <div class="listing-heading text-center">
+                    <h6 class="text-primary"><span style="font-weight: bold;">Topics:</span> {{ enrolled.student_listing_id.topics }}</h6>
+                    <br>
+                    <p>
+                      <i class="fas fa-th-large"></i> <span style="font-weight: bold;">Description:</span> {{ enrolled.student_listing_id.description }}</p>
+                  </div>
+                  
+
+                  
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                    
+                    <button class="btn-danger btn-block btn-lg">
+                      <a style="color: #fff;" href="{% url 'classlisting_delete' enrolled.student_listing_id.id %}">Remove</a>
+                    </button>
+                  
+                  </div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">
+            <p>No Listings Available</p>
+          </div>
+        {% endif %}
+      </div>
+
+      
+    </div>
+  </section>
+
+  <hr>
+  <hr>
+
+  <div class="text-center container">
+    <h2>
+      -- Available Classes -- 
+    </h2>
+  </div>
+
+<!-- Available Listings -->
+  <section id="listings" class="py-4">
+    <div class="container">
+      <div class="row">
+        {% if listings %}
+          {% for listing in listings %}
+          <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card listing-preview">
+                <img class="card-img-top" src="/" alt="">
+                <div class="card-img-overlay">
+                 
+                </div>
+                <div class="card-body" style="background-color: seashell;">
+                  <div class="listing-heading text-center" style="background-color:#fbdfcc">
+                    <h4 class="text-primary"><a href="{% url 'classlisting_detail' listing.id %}">{{ listing.classname }}</a></h4>
+                    <p>
+                      <i class="fas fa-map-marker text-secondary"></i> By : {{ listing.teacherid.name }}</p>
+                  </div>
+                  <hr>
+                  <div class="listing-heading text-center">
+                    <h6 class="text-primary"><span style="font-weight: bold;">Topics:</span> {{ listing.topics }}</h6>
+                    <br>
+                    <p>
+                      <i class="fas fa-th-large"></i> <span style="font-weight: bold;">Description:</span> {{ listing.description }}</p>
+                  </div>
+                  
+
+                  
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                    
+                    <button class="btn-primary btn-block btn-lg">
+                      <a style="color: #fff;" href="{% url 'classlisting_save' listing.id %}">Enroll</a>
+                    </button>
+                  
+                  </div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">
+            <p>No Listings Available</p>
+          </div>
+        {% endif %}
+      </div>
+
+      
+    </div>
+  </section>
+
+  
+  {% endblock %}
