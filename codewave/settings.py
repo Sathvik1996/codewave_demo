@@ -16,7 +16,7 @@ parser.read_file(open(os.path.join(BASE_DIR, 'codewave/config.ini')))
 SECRET_KEY = parser.get('global', 'SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1','codewavetest.herokuapp.com']
 
