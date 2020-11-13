@@ -1,6 +1,7 @@
 
 import os
 from configparser import RawConfigParser
+import dj_database_url
 
 parser = RawConfigParser()
 
@@ -22,6 +23,7 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1','codewavetest.herokuapp.com
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'student_profiles.apps.StudentProfilesConfig',
     'teachers.apps.TeachersConfig',
     'django.contrib.admin',
@@ -33,6 +35,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -41,6 +44,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'codewave.urls'
 
@@ -66,7 +71,8 @@ WSGI_APPLICATION = 'codewave.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
